@@ -1,6 +1,7 @@
 package com.sum.Security.user;
 
 
+import com.sum.Security.user.modal.type.Role;
 import jakarta.persistence.*;
 
 import lombok.AllArgsConstructor;

@@ -1,5 +1,6 @@
-package com.sum.Security.user;
+package com.sum.Security.repository;
 
+import com.sum.Security.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
