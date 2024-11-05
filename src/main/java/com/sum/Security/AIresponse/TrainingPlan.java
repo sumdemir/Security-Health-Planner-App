@@ -1,15 +1,13 @@
 package com.sum.Security.AIresponse;
 
-
+import com.sum.Security.user.Client;
 import com.sum.Security.user.Trainer;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.sql.Time;
 import java.sql.Timestamp;
-
 
 @Data
 @NoArgsConstructor
@@ -30,8 +28,12 @@ public class TrainingPlan {
     private Timestamp createdAt;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "trainer_id", nullable = false)
     private Trainer trainer;
+
+    @ManyToOne
+    @JoinColumn(name = "client_id", nullable = false)
+    private Client client;
 
     @Builder
     public TrainingPlan(String planName,Trainer trainer, String planDetails,

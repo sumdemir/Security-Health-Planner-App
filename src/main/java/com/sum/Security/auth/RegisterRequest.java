@@ -1,5 +1,6 @@
 package com.sum.Security.auth;
 
+import com.sum.Security.user.modal.type.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,4 +16,6 @@ public class RegisterRequest {
     private String lastname;
     private String email;
     private String password;
+    private Role role;
+
 }

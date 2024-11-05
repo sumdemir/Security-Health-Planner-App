@@ -1,7 +1,9 @@
 package com.sum.Security.auth;
 
 import com.sum.Security.config.JwtService;
-import com.sum.Security.user.modal.type.Role;
+import com.sum.Security.user.Client;
+import com.sum.Security.user.Dietitian;
+import com.sum.Security.user.Trainer;
 import com.sum.Security.user.User;
 import com.sum.Security.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,16 +21,26 @@ public class AuthenticationService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
-
-
     public AuthenticationResponse register(RegisterRequest request) {
-        var user = User.builder()
-                .firstname(request.getFirstname())
-                .lastname(request.getLastname())
-                .email(request.getEmail())
-                .password(passwordEncoder.encode(request.getPassword()))
-                .role(Role.USER)
-                .build();
+        User user;
+        switch (request.getRole()) {
+            case CLIENT:
+                user = new Client();
+                break;
+            case DIETITIAN:
+                user = new Dietitian();
+                break;
+            case TRAINER:
+                user = new Trainer();
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid role");
+        }
+        user.setFirstname(request.getFirstname());
+        user.setLastname(request.getLastname());
+        user.setEmail(request.getEmail());
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
+        user.setRole(request.getRole());
         repository.save(user);
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder()

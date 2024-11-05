@@ -1,14 +1,13 @@
 package com.sum.Security.AIresponse;
 
+import com.sum.Security.user.Client;
 import com.sum.Security.user.Dietitian;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
@@ -29,8 +28,12 @@ public class DietPlan {
     private Timestamp createdAt;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "dietitian_id", nullable = false)
     private Dietitian dietitian;
+
+    @ManyToOne
+    @JoinColumn(name = "client_id", nullable = false)
+    private Client client;
 
     @Builder
     public DietPlan(String planName, String planDetails, Dietitian dietitian

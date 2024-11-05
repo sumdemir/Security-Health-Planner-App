@@ -1,25 +1,25 @@
-package com.sum.Security.user;
+package com.sum.Security.Request;
 
 import com.sum.Security.user.modal.type.ActivityLevel;
-import jakarta.persistence.*;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
 
+@Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "client")
-public class Client extends User {
+public class ClientUpdateRequest {
 
+    private Integer userid;
     private Integer age;
     private Double height;
     private Double weight;
     private String medicalConditions;
     private String goal;
-
-    @Enumerated(EnumType.STRING)
     private ActivityLevel activityLevel;
 }
