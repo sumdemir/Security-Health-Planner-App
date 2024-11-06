@@ -10,13 +10,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ClientUpdateRequest {
-
+public class DietitianUpdateRequest {
     private Integer userid;
+    private String specialization;
+    private Integer experienceYear;
+    private String certification;
     private Integer age;
-    private Double height;
-    private Double weight;
-    private String medicalConditions;
-    private String goal;
-    private ActivityLevel activityLevel;
 }
