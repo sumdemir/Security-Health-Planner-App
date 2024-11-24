@@ -32,6 +32,7 @@ public class DietPlanServiceImp implements DietPlanService {
 
     private final RestTemplate restTemplate = new RestTemplate();
     private final ObjectMapper objectMapper = new ObjectMapper();
+
     private static final String API_KEY = "AIzaSyCxjiFflp8DlN0anjpmbwQN0qjJ_OOhpCA";
     private static final String API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + API_KEY;
 
@@ -87,8 +88,18 @@ public class DietPlanServiceImp implements DietPlanService {
 
     private String createDietPlanPrompt(Client client) {
         return String.format(
-                "I need a diet plan for a client with the following details: Age: %d, Height: %.2f cm, Weight: %.2f kg, "
-                        + "Medical conditions: %s, Goal: %s, Activity level: %s. Please provide a personalized diet plan.",
+                "Sen sana gelen müşterilere haftalık yeme içme programı oluşturan bir sanal diyetisyensin. Ona göre konuş ve program oluştur. "
+                        + "Müşterinin verdiği bilgilere göre günlük alması gereken kaloriyi hesapla ve ona göre haftalık diyet listesi hazırla. "
+                        + "Bana aşağıdaki bilgileri vererek, kişiye özel bir diyet planı oluştur: Yaş: %d, Boy: %.2f cm, Kilo: %.2f kg, "
+                        + "Tıbbi Durumlar: %s, Hedef Kilo: %s, Aktivite Seviyesi: %s. "
+                        + "Diyet planını 1 hafta boyunca, her gün için kahvaltı, öğle yemeği, akşam yemeği ve atıştırmalıklar dahil olacak şekilde hazırla. "
+                        + "Her öğün için kalori miktarını belirt ve makro besin değerlerini (protein, karbonhidrat, yağ) dengeli bir şekilde paylaştır. "
+                        + "Diyet planı, sağlıklı ve sürdürülebilir bir kilo kaybı sağlamayı hedeflemeli ve günlük müşterinin alması gerektiği kalori miktarı kadar olmalı. "
+                        + "Yemekler, tam gıdalar, porsiyon kontrolü ve dengeli beslenmeye odaklanmalı. "
+                        + "Atıştırmalıklar da dahil olmak üzere, tüm öğünler pratik ve uygulanabilir olmalı, böylece müşteri bu planı günlük yaşamına kolayca adapte edebilir. "
+                        + "Ayrıca, bol su içme ve düzenli öğün saatlerine dikkat etmenin önemini vurgula. "
+                        + "Hedef, sağlıklı bir şekilde kilo kaybı sağlarken genel sağlığı iyileştirmek ve dengeli bir yaşam tarzını sürdürmek olmalı."
+                        + "\n\nPlanı, hedef kiloya ulaşmaya yönelik uygun, sürdürülebilir bir diyet önerisiyle oluştur.",
                 client.getAge(),
                 client.getHeight(),
                 client.getWeight(),

@@ -25,7 +25,7 @@ public class SecurityConfiguration {
         http
                 .csrf(AbstractHttpConfigurer::disable) // CSRF korumasını devre dışı bırakma
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/v1/auth/**").permitAll() // Belirli URL'lere erişimi serbest bırak
+                        .requestMatchers("/api/**").permitAll() // Belirli URL'lere erişimi serbest bırak
                         .anyRequest().authenticated() // Diğer tüm isteklere yetki gerektir
                 )
                 .sessionManagement(session -> session
