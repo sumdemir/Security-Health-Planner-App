@@ -22,7 +22,6 @@ public class DietitianServiceImp implements DietitianService {
                         ));
         dietitian.setCertification(request.getCertification());
         dietitian.setExperienceYear(request.getExperienceYear());
-        dietitian.setCertification(request.getCertification());
         dietitian.setAge(request.getAge());
         dietitian.setSpecialization(request.getSpecialization());
 

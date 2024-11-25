@@ -80,7 +80,8 @@ public class DietPlanServiceImp implements DietPlanService {
 
             String responseString = response.getBody();
             return response.getBody();
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             e.printStackTrace();
             return "Error occurred while requesting diet plan.";
         }
