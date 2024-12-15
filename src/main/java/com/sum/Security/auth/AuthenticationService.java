@@ -21,6 +21,8 @@ public class AuthenticationService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
+
+
     public AuthenticationResponse register(RegisterRequest request) {
         User user;
         switch (request.getRole()) {
@@ -61,5 +63,22 @@ public class AuthenticationService {
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .build();
+    }
+
+    public void forgotPassword(String email) {
+
+        repository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("User with this email does not exist"));
+
+    }
+
+    public void resetPassword(String email, String newPassword) {
+        // Kullanıcıyı bul
+        User user = repository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("User with this email does not exist."));
+
+        // Yeni şifreyi hashleyip kullanıcıya kaydet
+        user.setPassword(passwordEncoder.encode(newPassword));
+        repository.save(user);
     }
 }
