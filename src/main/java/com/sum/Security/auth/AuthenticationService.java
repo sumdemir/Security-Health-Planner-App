@@ -66,18 +66,20 @@ public class AuthenticationService {
     }
 
     public void forgotPassword(String email) {
-
         repository.findByEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException("User with this email does not exist"));
-
     }
 
     public void resetPassword(String email, String newPassword) {
-        // Kullanıcıyı bul
         User user = repository.findByEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException("User with this email does not exist."));
+        user.setPassword(passwordEncoder.encode(newPassword));
+        repository.save(user);
+    }
 
-        // Yeni şifreyi hashleyip kullanıcıya kaydet
+    public void updatePassword(String email, String newPassword) {
+        User user = repository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("User with this email does not exist."));
         user.setPassword(passwordEncoder.encode(newPassword));
         repository.save(user);
     }

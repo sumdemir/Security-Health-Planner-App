@@ -1,6 +1,7 @@
 package com.sum.Security.auth;
 
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,17 +30,22 @@ public class AuthenticationController {
     }
 
     @PostMapping("/forgot-password")
-    public ResponseEntity<String> forgotPassword(@RequestParam String email) {
-        service.forgotPassword(email);
+    public ResponseEntity<String> forgotPassword(@RequestBody ForgotPasswordRequest request) {
+        service.forgotPassword(request.getEmail());
         return ResponseEntity.ok("Password reset instructions have been sent if the email exists.");
     }
 
     @PostMapping("/reset-password")
-    public ResponseEntity<String> resetPassword(
-            @RequestParam String email,
-            @RequestParam String newPassword) {
-        service.resetPassword(email, newPassword);
+    public ResponseEntity<String> resetPassword(@RequestBody ResetPasswordRequest request) {
+        service.resetPassword(request.getEmail(), request.getNewPassword());
         return ResponseEntity.ok("Password has been successfully reset.");
+
+    }
+
+    @PutMapping("/update-password")
+    public ResponseEntity<String> updatePassword(@RequestBody @Valid UpdatePasswordRequest request) {
+        service.updatePassword(request.getEmail(), request.getNewPassword());
+        return ResponseEntity.ok("Password has been successfully updated.");
     }
 
 }
