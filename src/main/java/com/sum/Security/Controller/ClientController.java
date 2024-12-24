@@ -6,6 +6,7 @@ import com.sum.Security.Service.DietPlanService;
 import com.sum.Security.auth.AuthenticationResponse;
 import com.sum.Security.auth.RegisterRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,10 +20,13 @@ public class ClientController {
     private final DietPlanService dietPlanService;
 
     @PutMapping("/update")
-    public void update(
-            @RequestBody ClientUpdateRequest request
-    ){
-       service.update(request);
+    public ResponseEntity<String> update(@RequestBody ClientUpdateRequest request) {
+        try {
+            service.update(request);
+            return ResponseEntity.ok("Profile updated successfully.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while updating the profile.");
+        }
     }
 
     @PostMapping("/get-diet-plan")
