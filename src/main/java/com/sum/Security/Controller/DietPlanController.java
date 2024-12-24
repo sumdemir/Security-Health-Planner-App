@@ -22,4 +22,6 @@ public class DietPlanController {
             return ResponseEntity.status(500).body("Error occurred while fetching the diet plan: " + e.getMessage());
         }
     }
+
+
 }

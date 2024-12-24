@@ -67,4 +67,8 @@ public class User implements UserDetails {
         return true;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
 }
