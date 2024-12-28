@@ -9,4 +9,5 @@ public class DietitianDTO {
     private String firstName;
     private String lastName;
     private String specialization;
+    private Integer id;
 }

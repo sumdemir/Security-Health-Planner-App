@@ -1,5 +1,6 @@
 package com.sum.Security.Controller;
 
+import com.sum.Security.Request.DietPlanRequest;
 import com.sum.Security.Service.DietPlanService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,16 @@ public class DietPlanController {
     public ResponseEntity<String> getDietPlan(@RequestParam Integer clientId, @RequestParam Integer dietitianId) {
         try {
             String dietPlanResponse = dietPlanService.getDietPlan(clientId, dietitianId);
+            return ResponseEntity.ok(dietPlanResponse);
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Error occurred while fetching the diet plan: " + e.getMessage());
+        }
+    }
+
+    @PostMapping("/getDietPlanChat")
+    public ResponseEntity<String> getDietPlanChat(@RequestBody DietPlanRequest request) {
+        try {
+            String dietPlanResponse = dietPlanService.getDietPlan(request.getClientId(), request.getDietitianId());
             return ResponseEntity.ok(dietPlanResponse);
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Error occurred while fetching the diet plan: " + e.getMessage());

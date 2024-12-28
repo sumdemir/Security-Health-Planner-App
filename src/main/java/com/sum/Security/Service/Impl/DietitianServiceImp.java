@@ -38,7 +38,8 @@ public class DietitianServiceImp implements DietitianService {
                 dietitian -> new DietitianDTO(
                         dietitian.getFirstname(),
                         dietitian.getLastname(),
-                        dietitian.getSpecialization()
+                        dietitian.getSpecialization(),
+                        dietitian.getId()
                 )).toList();
 
 
