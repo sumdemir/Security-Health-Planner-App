@@ -24,7 +24,7 @@ import java.util.Map;
 
 @Service
 @AllArgsConstructor
-public class DietPlanServiceImp implements DietPlanService {
+public class DietPlanServiceImp implements DietPlanService{
 
     private final ClientRepository clientRepository;
     private final DietPlanRepository dietPlanRepository;
@@ -33,11 +33,37 @@ public class DietPlanServiceImp implements DietPlanService {
     private final RestTemplate restTemplate = new RestTemplate();
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    private static final String API_KEY = "AIzaSyCxjiFflp8DlN0anjpmbwQN0qjJ_OOhpCA";
+    private static final String API_KEY = "xxx";
     private static final String API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + API_KEY;
 
     @Override
     public String getDietPlan(Integer clientId, Integer dietitianId) {
+
+        Client client = clientRepository.findById(clientId).orElseThrow(() -> new RuntimeException("Client not found"));
+        Dietitian dietitian = dietitianRepository.findById(dietitianId).orElseThrow(() -> new RuntimeException("Dietitian not found"));
+
+        String dietPlanResponse = requestDietPlan(client);
+        JSONObject jsonResponse = new JSONObject(dietPlanResponse);
+        JSONArray candidates = jsonResponse.getJSONArray("candidates");
+        JSONObject content = candidates.getJSONObject(0).getJSONObject("content");
+        JSONArray parts = content.getJSONArray("parts");
+        String text = parts.getJSONObject(0).getString("text");
+
+        DietPlan dietPlan = new DietPlan();
+        dietPlan.setPlanDetails(text);
+        dietPlan.setPlanName("Diet Plan for " + client.getFirstname());
+        dietPlan.setClient(client);
+        dietPlan.setDietitian(dietitian);
+        dietPlan.setCreatedAt(new Timestamp(System.currentTimeMillis()));
+
+
+        dietPlanRepository.save(dietPlan);
+
+        return dietPlanResponse;
+    }
+
+    @Override
+    public String getDietPlanChat(Integer clientId, Integer dietitianId) {
 
         Client client = clientRepository.findById(clientId).orElseThrow(() -> new RuntimeException("Client not found"));
         Dietitian dietitian = dietitianRepository.findById(dietitianId).orElseThrow(() -> new RuntimeException("Dietitian not found"));

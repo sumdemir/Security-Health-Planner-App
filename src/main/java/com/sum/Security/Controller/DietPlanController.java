@@ -27,7 +27,7 @@ public class DietPlanController {
     @PostMapping("/getDietPlanChat")
     public ResponseEntity<String> getDietPlanChat(@RequestBody DietPlanRequest request) {
         try {
-            String dietPlanResponse = dietPlanService.getDietPlan(request.getClientId(), request.getDietitianId());
+            String dietPlanResponse = dietPlanService.getDietPlanChat(request.getClientId(), request.getDietitianId());
             return ResponseEntity.ok(dietPlanResponse);
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Error occurred while fetching the diet plan: " + e.getMessage());

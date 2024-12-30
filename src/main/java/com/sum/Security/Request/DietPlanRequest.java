@@ -1,14 +1,13 @@
 package com.sum.Security.Request;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 public class DietPlanRequest {
     private Integer clientId;
     private Integer dietitianId;
