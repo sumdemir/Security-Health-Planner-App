@@ -33,7 +33,7 @@ public class TrainingPlanServiceImp implements TrainingPlanService {
     private final RestTemplate restTemplate = new RestTemplate();
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    private static final String API_KEY = "AIzaSyCxjiFflp8DlN0anjpmbwQN0qjJ_OOhpCA";
+    private static final String API_KEY = "xxx";
     private static final String API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + API_KEY;
 
     @Override
@@ -60,6 +60,31 @@ public class TrainingPlanServiceImp implements TrainingPlanService {
 
         return trainingPlanResponse;
 
+    }
+
+    @Override
+    public String getTrainingPlanChat(Integer clientId, Integer trainerId) {
+
+        Client client = clientRepository.findById(clientId).orElseThrow(() -> new RuntimeException("Client not found."));
+        Trainer trainer = trainerRepository.findById(trainerId).orElseThrow( () -> new RuntimeException("Trainer not found."));
+
+        String trainingPlanResponse = requestTrainingPlan(client);
+        JSONObject jsonResponse = new JSONObject(trainingPlanResponse);
+        JSONArray candidates = jsonResponse.getJSONArray("candidates");
+        JSONObject content = candidates.getJSONObject(0).getJSONObject("content");
+        JSONArray parts = content.getJSONArray("parts");
+        String text = parts.getJSONObject(0).getString("text");
+
+        TrainingPlan trainingPlan = new TrainingPlan();
+        trainingPlan.setPlanDetails(text);
+        trainingPlan.setPlanName("Training plan for " + client.getFirstname());
+        trainingPlan.setClient(client);
+        trainingPlan.setTrainer(trainer);
+        trainingPlan.setCreatedAt(new Timestamp(System.currentTimeMillis()));
+
+        trainingPlanRepository.save(trainingPlan);
+
+        return trainingPlanResponse;
     }
 
     private String requestTrainingPlan(Client client) {
