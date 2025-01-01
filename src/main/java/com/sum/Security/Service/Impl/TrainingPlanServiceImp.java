@@ -2,6 +2,8 @@ package com.sum.Security.Service.Impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sum.Security.AIresponse.TrainingPlan;
+import com.sum.Security.DTO.TrainerDTO;
+import com.sum.Security.DTO.TrainingPlanDTO;
 import com.sum.Security.Service.TrainingPlanService;
 import com.sum.Security.repository.ClientRepository;
 import com.sum.Security.repository.TrainerRepository;
@@ -85,6 +87,83 @@ public class TrainingPlanServiceImp implements TrainingPlanService {
         trainingPlanRepository.save(trainingPlan);
 
         return trainingPlanResponse;
+    }
+
+    @Override
+    public List<TrainingPlan> getAllTrainingPlans() {
+        return trainingPlanRepository.findAll();
+    }
+
+    @Override
+    public TrainingPlanDTO getTrainingPlanById(Long id) {
+        TrainingPlan trainingPlan = trainingPlanRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Training Plan not found with id: " + id));
+
+        return new TrainingPlanDTO(
+                trainingPlan.getId(),
+                trainingPlan.getPlanName(),
+                trainingPlan.getPlanDetails(),
+                trainingPlan.getCreatedAt()
+        );
+    }
+
+    @Override
+    public TrainingPlanDTO convertTrainingPlan(Long clientId, Long trainerId) {
+        Client client = clientRepository.findById(Math.toIntExact(clientId)).orElseThrow(() -> new RuntimeException("Client not found."));
+        Trainer trainer = trainerRepository.findById(Math.toIntExact(trainerId)).orElseThrow( () -> new RuntimeException("Trainer not found."));
+
+        String trainingPlanResponse = requestTrainingPlan(client);
+        JSONObject jsonResponse = new JSONObject(trainingPlanResponse);
+        JSONArray candidates = jsonResponse.getJSONArray("candidates");
+        JSONObject content = candidates.getJSONObject(0).getJSONObject("content");
+        JSONArray parts = content.getJSONArray("parts");
+        String text = parts.getJSONObject(0).getString("text");
+
+        TrainingPlan trainingPlan = new TrainingPlan();
+        trainingPlan.setPlanDetails(text);
+        trainingPlan.setPlanName("Training plan for " + client.getFirstname());
+        trainingPlan.setClient(client);
+        trainingPlan.setTrainer(trainer);
+        trainingPlan.setCreatedAt(new Timestamp(System.currentTimeMillis()));
+
+        trainingPlanRepository.save(trainingPlan);
+
+        return new TrainingPlanDTO(
+                trainingPlan.getId(),
+                trainingPlan.getPlanName(),
+                trainingPlan.getPlanDetails(),
+                trainingPlan.getCreatedAt()
+        );
+
+    }
+
+    @Override
+    public TrainingPlanDTO getTrainingPlanDTO(Integer clientId, Integer trainerId) {
+        Client client = clientRepository.findById(Math.toIntExact(clientId)).orElseThrow(() -> new RuntimeException("Client not found."));
+        Trainer trainer = trainerRepository.findById(Math.toIntExact(trainerId)).orElseThrow( () -> new RuntimeException("Trainer not found."));
+
+        String trainingPlanResponse = requestTrainingPlan(client);
+        JSONObject jsonResponse = new JSONObject(trainingPlanResponse);
+        JSONArray candidates = jsonResponse.getJSONArray("candidates");
+        JSONObject content = candidates.getJSONObject(0).getJSONObject("content");
+        JSONArray parts = content.getJSONArray("parts");
+        String text = parts.getJSONObject(0).getString("text");
+
+        TrainingPlan trainingPlan = new TrainingPlan();
+        trainingPlan.setPlanDetails(text);
+        trainingPlan.setPlanName("Training plan for " + client.getFirstname());
+        trainingPlan.setClient(client);
+        trainingPlan.setTrainer(trainer);
+        trainingPlan.setCreatedAt(new Timestamp(System.currentTimeMillis()));
+
+        trainingPlanRepository.save(trainingPlan);
+
+        return new TrainingPlanDTO(
+                trainingPlan.getId(),
+                trainingPlan.getPlanName(),
+                trainingPlan.getPlanDetails(),
+                trainingPlan.getCreatedAt()
+        );
     }
 
     private String requestTrainingPlan(Client client) {

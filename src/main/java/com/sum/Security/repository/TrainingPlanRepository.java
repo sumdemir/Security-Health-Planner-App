@@ -1,8 +1,11 @@
 package com.sum.Security.repository;
 
 import com.sum.Security.AIresponse.TrainingPlan;
+import com.sum.Security.DTO.TrainingPlanDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface TrainingPlanRepository extends JpaRepository<TrainingPlan, Integer> {
+import java.util.Optional;
 
+public interface TrainingPlanRepository extends JpaRepository<TrainingPlan, Integer> {
+    Optional<TrainingPlan> findById(Long id);
 }
