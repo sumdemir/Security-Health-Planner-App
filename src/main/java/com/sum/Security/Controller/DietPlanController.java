@@ -1,5 +1,6 @@
 package com.sum.Security.Controller;
 
+import com.sum.Security.DTO.DietPlanDTO;
 import com.sum.Security.Request.DietPlanRequest;
 import com.sum.Security.Service.DietPlanService;
 import lombok.RequiredArgsConstructor;
@@ -31,6 +32,17 @@ public class DietPlanController {
             return ResponseEntity.ok(dietPlanResponse);
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Error occurred while fetching the diet plan: " + e.getMessage());
+        }
+    }
+
+    @PostMapping("/getDietPlanDTO")
+    public ResponseEntity<DietPlanDTO> getDietPlanDTO(@RequestBody DietPlanRequest request){
+        try{
+            DietPlanDTO dietPlanDTO = dietPlanService.getDietPlanDTO(request.getClientId(),
+                    request.getDietitianId());
+            return ResponseEntity.ok(dietPlanDTO);
+        } catch (Exception e){
+            return ResponseEntity.status(500).body(null);
         }
     }
 

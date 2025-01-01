@@ -36,6 +36,7 @@ public class TrainingPlanServiceImp implements TrainingPlanService {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     private static final String API_KEY = "xxx";
+
     private static final String API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + API_KEY;
 
     @Override

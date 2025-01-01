@@ -2,12 +2,14 @@ package com.sum.Security.Service.Impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sum.Security.AIresponse.DietPlan;
+import com.sum.Security.DTO.DietPlanDTO;
 import com.sum.Security.Service.DietPlanService;
 import com.sum.Security.repository.ClientRepository;
 import com.sum.Security.repository.DietPlanRepository;
 import com.sum.Security.repository.DietitianRepository;
 import com.sum.Security.user.Client;
 import com.sum.Security.user.Dietitian;
+import com.sum.Security.user.Trainer;
 import lombok.AllArgsConstructor;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -86,6 +88,37 @@ public class DietPlanServiceImp implements DietPlanService{
         dietPlanRepository.save(dietPlan);
 
         return dietPlanResponse;
+    }
+
+    @Override
+    public DietPlanDTO getDietPlanDTO(Integer clientId, Integer dietitianId) {
+        Client client = clientRepository.findById(clientId).orElseThrow(() -> new RuntimeException("Client not found"));
+        Dietitian dietitian = dietitianRepository.findById(dietitianId).orElseThrow(() -> new RuntimeException("Dietitian not found"));
+
+        String dietPlanResponse = requestDietPlan(client);
+        JSONObject jsonResponse = new JSONObject(dietPlanResponse);
+        JSONArray candidates = jsonResponse.getJSONArray("candidates");
+        JSONObject content = candidates.getJSONObject(0).getJSONObject("content");
+        JSONArray parts = content.getJSONArray("parts");
+        String text = parts.getJSONObject(0).getString("text");
+
+        DietPlan dietPlan = new DietPlan();
+        dietPlan.setPlanDetails(text);
+        dietPlan.setPlanName("Diet Plan for " + client.getFirstname());
+        dietPlan.setClient(client);
+        dietPlan.setDietitian(dietitian);
+        dietPlan.setCreatedAt(new Timestamp(System.currentTimeMillis()));
+
+
+        dietPlanRepository.save(dietPlan);
+
+        return new DietPlanDTO(
+                dietPlan.getId(),
+                dietPlan.getPlanName(),
+                dietPlan.getPlanDetails(),
+                dietPlan.getCreatedAt()
+        );
+
     }
 
     public String requestDietPlan(Client client) {
