@@ -51,9 +51,9 @@ public class DietPlanController {
     }
 
     @GetMapping("/getAllDietPlansForUser")
-    public ResponseEntity<List<DietPlanDTO>> getAllDietPlansForUser(@RequestBody DietPlanForUserRequest request) {
+    public ResponseEntity<List<DietPlanDTO>> getAllDietPlansForUser(@RequestParam Integer clientId) {
         try{
-            List<DietPlanDTO> dietPlans = dietPlanService.getAllDietPlansForUser(request.getClientId());
+            List<DietPlanDTO> dietPlans = dietPlanService.getAllDietPlansForUser(clientId);
             return ResponseEntity.ok(dietPlans);
         } catch (Exception e){
             return ResponseEntity.status(500).body(null);
