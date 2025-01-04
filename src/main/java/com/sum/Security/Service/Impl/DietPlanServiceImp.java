@@ -9,7 +9,6 @@ import com.sum.Security.repository.DietPlanRepository;
 import com.sum.Security.repository.DietitianRepository;
 import com.sum.Security.user.Client;
 import com.sum.Security.user.Dietitian;
-import com.sum.Security.user.Trainer;
 import lombok.AllArgsConstructor;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -23,6 +22,8 @@ import org.springframework.web.client.RestTemplate;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -109,7 +110,6 @@ public class DietPlanServiceImp implements DietPlanService{
         dietPlan.setDietitian(dietitian);
         dietPlan.setCreatedAt(new Timestamp(System.currentTimeMillis()));
 
-
         dietPlanRepository.save(dietPlan);
 
         return new DietPlanDTO(
@@ -168,4 +168,21 @@ public class DietPlanServiceImp implements DietPlanService{
                 client.getActivityLevel()
         );
     }
+
+    @Override
+    public List<DietPlanDTO> getAllDietPlansForUser(Integer clientId){
+        Client client = clientRepository.findById(clientId).orElseThrow(() -> new RuntimeException("Client not found"));
+
+        List<DietPlan> dietPlans = dietPlanRepository.findByClientId(clientId);
+        return dietPlans.stream()
+                .map(dietPlan -> new DietPlanDTO(
+                        dietPlan.getId(),
+                        dietPlan.getPlanName(),
+                        dietPlan.getPlanDetails(),
+                        dietPlan.getCreatedAt()
+                ))
+                .collect(Collectors.toList());
+    }
+
+
 }

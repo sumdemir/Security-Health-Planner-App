@@ -14,4 +14,6 @@ public class AuthenticationResponse{
 
     private String token;
     private Integer userid;
+    private String firstname;
+    private String lastname;
 }
