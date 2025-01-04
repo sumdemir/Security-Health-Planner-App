@@ -41,8 +41,6 @@ public class DietitianServiceImp implements DietitianService {
                         dietitian.getSpecialization(),
                         dietitian.getId()
                 )).toList();
-
-
     }
 
 

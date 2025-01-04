@@ -1,7 +1,9 @@
 package com.sum.Security.Service.Impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sum.Security.AIresponse.DietPlan;
 import com.sum.Security.AIresponse.TrainingPlan;
+import com.sum.Security.DTO.DietPlanDTO;
 import com.sum.Security.DTO.TrainerDTO;
 import com.sum.Security.DTO.TrainingPlanDTO;
 import com.sum.Security.Service.TrainingPlanService;
@@ -23,6 +25,7 @@ import org.springframework.web.client.RestTemplate;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -36,7 +39,6 @@ public class TrainingPlanServiceImp implements TrainingPlanService {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     private static final String API_KEY = "xxx";
-
     private static final String API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + API_KEY;
 
     @Override
@@ -166,6 +168,22 @@ public class TrainingPlanServiceImp implements TrainingPlanService {
                 trainingPlan.getCreatedAt()
         );
     }
+
+    @Override
+    public List<TrainingPlanDTO> getAllTrainingPlansForUser(Integer clientId) {
+        Client client = clientRepository.findById(clientId).orElseThrow(() -> new RuntimeException("Client not found"));
+
+        List<TrainingPlan> trainingPlans = trainingPlanRepository.findByClientId(clientId);
+        return trainingPlans.stream()
+                .map(trainingPlan -> new TrainingPlanDTO(
+                        trainingPlan.getId(),
+                        trainingPlan.getPlanName(),
+                        trainingPlan.getPlanDetails(),
+                        trainingPlan.getCreatedAt()
+                )).collect(Collectors.toList());
+
+    }
+
 
     private String requestTrainingPlan(Client client) {
         try {

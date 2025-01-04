@@ -12,4 +12,5 @@ public interface TrainingPlanService {
     TrainingPlanDTO getTrainingPlanById(Long id);
     TrainingPlanDTO convertTrainingPlan(Long userId, Long trainerId);
     TrainingPlanDTO getTrainingPlanDTO(Integer clientId, Integer trainerId);
+    List<TrainingPlanDTO> getAllTrainingPlansForUser(Integer clientId);
 }

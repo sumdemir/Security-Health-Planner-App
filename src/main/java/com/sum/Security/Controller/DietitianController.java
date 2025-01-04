@@ -32,6 +32,11 @@ public class DietitianController {
     public List<DietitianDTO> getAllDietitians(){
         return service.getAllDietitians();
     }
-
-
 }
+
+
+
+
+
+
+

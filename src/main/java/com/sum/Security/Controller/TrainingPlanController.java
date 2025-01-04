@@ -2,6 +2,7 @@ package com.sum.Security.Controller;
 
 
 import com.sum.Security.AIresponse.TrainingPlan;
+import com.sum.Security.DTO.DietPlanDTO;
 import com.sum.Security.DTO.TrainingPlanDTO;
 import com.sum.Security.Request.TrainingPlanRequest;
 import com.sum.Security.Service.TrainingPlanService;
@@ -64,10 +65,30 @@ public class TrainingPlanController {
                     request.getTrainerId());
             return ResponseEntity.ok(trainingPlanDTO);
         } catch (Exception e) {
-            // Hata durumunda ResponseEntity ile hata mesajını döndürüyoruz
+            return ResponseEntity.status(500).body(null);
+        }
+    }
+
+    @GetMapping("/getAllTrainingPlansForUser")
+    public ResponseEntity<List<TrainingPlanDTO>> getAllTrainingPlansForUser(@RequestParam Integer clientId) {
+        try{
+            List<TrainingPlanDTO> trainingPlans = trainingPlanService.getAllTrainingPlansForUser(clientId);
+            return ResponseEntity.ok(trainingPlans);
+        } catch (Exception e){
             return ResponseEntity.status(500).body(null);
         }
     }
 
 
+
 }
+
+
+
+
+
+
+
+
+
+
