@@ -65,6 +65,7 @@ public class AuthenticationService {
                 .userid(user.getId())
                 .firstname(user.getFirstname())
                 .lastname(user.getLastname())
+                .email(user.getEmail())
                 .build();
     }
 

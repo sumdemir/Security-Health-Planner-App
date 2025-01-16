@@ -16,4 +16,5 @@ public class AuthenticationResponse{
     private Integer userid;
     private String firstname;
     private String lastname;
+    private String email;
 }
