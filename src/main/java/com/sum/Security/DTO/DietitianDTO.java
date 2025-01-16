@@ -10,4 +10,5 @@ public class DietitianDTO {
     private String lastName;
     private String specialization;
     private Integer id;
+    private String email;
 }

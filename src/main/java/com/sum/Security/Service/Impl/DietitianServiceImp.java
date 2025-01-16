@@ -39,7 +39,8 @@ public class DietitianServiceImp implements DietitianService {
                         dietitian.getFirstname(),
                         dietitian.getLastname(),
                         dietitian.getSpecialization(),
-                        dietitian.getId()
+                        dietitian.getId(),
+                        dietitian.getEmail()
                 )).toList();
     }
 

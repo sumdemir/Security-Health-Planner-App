@@ -39,7 +39,8 @@ public class TrainerServiceImp implements TrainerService {
                         trainer.getFirstname(),
                         trainer.getLastname(),
                         trainer.getSpecialization(),
-                        trainer.getId()
+                        trainer.getId(),
+                        trainer.getEmail()
                 )).toList();
 
     }
