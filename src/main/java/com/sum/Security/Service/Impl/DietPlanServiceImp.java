@@ -159,7 +159,8 @@ public class DietPlanServiceImp implements DietPlanService{
                         + "Atıştırmalıklar da dahil olmak üzere, tüm öğünler pratik ve uygulanabilir olmalı, böylece müşteri bu planı günlük yaşamına kolayca adapte edebilir. "
                         + "Ayrıca, bol su içme ve düzenli öğün saatlerine dikkat etmenin önemini vurgula. "
                         + "Hedef, sağlıklı bir şekilde kilo kaybı sağlarken genel sağlığı iyileştirmek ve dengeli bir yaşam tarzını sürdürmek olmalı."
-                        + "\n\nPlanı, hedef kiloya ulaşmaya yönelik uygun, sürdürülebilir bir diyet önerisiyle oluştur.",
+                        + "\n\nPlanı, hedef kiloya ulaşmaya yönelik uygun, sürdürülebilir bir diyet önerisiyle oluştur."
+                        + "Çok Önemli ! KESİNLİKLE İNGİLİZCE YANIT VER.",
                 client.getAge(),
                 client.getHeight(),
                 client.getWeight(),

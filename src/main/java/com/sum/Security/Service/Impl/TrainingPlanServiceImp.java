@@ -242,7 +242,8 @@ public class TrainingPlanServiceImp implements TrainingPlanService {
                         + "Egzersizler, müşterinin kondisyonunu artırmak, genel sağlığını iyileştirmek ve dengeli bir yaşam tarzını sürdürmek için tasarlanmış olmalı. "
                         + "Önerdiğin her egzersiz için uygun set ve tekrar sayılarını da belirle. "
                         + "Örneğin, başlangıç seviyesi için her egzersiz için 3 set ve 10-15 tekrar önerilebilirken, ileri seviye için set ve tekrar sayıları artırılabilir. "
-                        + "Programda hangi günler ağırlık antrenmanı, hangi günler kardiyo yapılacağına dikkat et. Dinlenme günlerini de plana ekle.",
+                        + "Programda hangi günler ağırlık antrenmanı, hangi günler kardiyo yapılacağına dikkat et. Dinlenme günlerini de plana ekle."
+                        + "Çok Önemli ! KESİNLİKLE İNGİLİZCE YANIT VER.",
                 client.getAge(),
                 client.getHeight(),
                 client.getWeight(),
