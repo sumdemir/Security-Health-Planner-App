@@ -31,7 +31,7 @@ public class MealCalorieServiceImpl implements MealCalorieService {
                 .name(mealCaloriesDTO.getName())
                 .calories(mealCaloriesDTO.getCalories())
                 .servingSizeG(mealCaloriesDTO.getServingSizeG())
-                .fatSaturatedG(mealCaloriesDTO.getFatTotalG())
+                .fatSaturatedG(mealCaloriesDTO.getFatSaturatedG())
                 .proteinG(mealCaloriesDTO.getProteinG())
                 .fatTotalG(mealCaloriesDTO.getFatTotalG())
                 .carbohydratesTotalG(mealCaloriesDTO.getCarbohydratesTotalG())
@@ -44,8 +44,8 @@ public class MealCalorieServiceImpl implements MealCalorieService {
                 .client(client)
                 .build();
 
-        // Veritabanına kaydet
-        mealRepository.save(mealCalories);
+            mealRepository.save(mealCalories);
+
         return mealCaloriesDTO;
     }
 
