@@ -26,13 +26,13 @@ public class MealCalories {
     private String proteinG; // Premium için metin dönebileceğinden String
 
     private Double fatTotalG;
-    private Double fatSaturatedG;
     private Double carbohydratesTotalG;
     private Double sodiumMg;
     private Double potassiumMg;
     private Double cholesterolMg;
     private Double fiberG;
     private Double sugarG;
+    private Double fatSaturatedG;
     private Timestamp createdAt;
 
     @ManyToOne

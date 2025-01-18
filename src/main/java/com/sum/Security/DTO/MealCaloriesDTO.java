@@ -17,6 +17,7 @@ public class MealCaloriesDTO {
     private Double cholesterolMg;
     private Double fiberG;
     private Double sugarG;
+    private Double fatSaturatedG;
     private Timestamp createdAt;
     private String calories;
     private String servingSizeG;
