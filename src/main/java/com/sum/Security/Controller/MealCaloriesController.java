@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/mealCalorie")
 @RequiredArgsConstructor
@@ -24,5 +26,15 @@ public class MealCaloriesController {
 
         return ResponseEntity.ok(savedMealCaloriesDTO);
 
+    }
+
+    @GetMapping("/getAllMealsForUser")
+    public ResponseEntity<List<MealCaloriesDTO>> getAllMealsForUser(@RequestParam Integer clientId){
+        try{
+            List<MealCaloriesDTO> mealCalories = mealCalorieService.getAllMealCaloriesForUser(clientId);
+            return ResponseEntity.ok(mealCalories);
+        } catch (Exception e){
+            return ResponseEntity.status(500).body(null);
+        }
     }
 }

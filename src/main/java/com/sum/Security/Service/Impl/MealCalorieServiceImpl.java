@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -51,6 +52,24 @@ public class MealCalorieServiceImpl implements MealCalorieService {
 
     @Override
     public List<MealCaloriesDTO> getAllMealCaloriesForUser(Integer clientId) {
-        return List.of();
+        Client client = clientRepository.findById(Math.toIntExact(clientId)).orElseThrow(() -> new RuntimeException("Client not found"));
+
+        List<MealCalories> mealCaloriesList = mealRepository.findByClientId(clientId);
+        return mealCaloriesList.stream().map(meal -> new MealCaloriesDTO(
+                        meal.getId(),
+                        meal.getName(),
+                        meal.getFatTotalG(),
+                        meal.getCarbohydratesTotalG(),
+                        meal.getSodiumMg(),
+                        meal.getPotassiumMg(),
+                        meal.getCholesterolMg(),
+                        meal.getFiberG(),
+                        meal.getSugarG(),
+                        meal.getFatSaturatedG(),
+                        meal.getCreatedAt(),
+                        meal.getCalories(),
+                        meal.getServingSizeG(),
+                        meal.getProteinG()
+                )).collect(Collectors.toList());
     }
 }
