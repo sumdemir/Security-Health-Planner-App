@@ -26,6 +26,7 @@ public class MealCalories {
     private String proteinG; // Premium için metin dönebileceğinden String
 
     private Double fatTotalG;
+    private Double fatSaturatedG;
     private Double carbohydratesTotalG;
     private Double sodiumMg;
     private Double potassiumMg;
@@ -56,5 +57,6 @@ public class MealCalories {
         this.calories = calories;
         this.servingSizeG = servingSizeG;
         this.proteinG = proteinG;
+        this.fatSaturatedG = fatSaturatedG;
     }
 }

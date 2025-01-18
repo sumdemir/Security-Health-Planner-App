@@ -31,6 +31,7 @@ public class MealCalorieServiceImpl implements MealCalorieService {
                 .name(mealCaloriesDTO.getName())
                 .calories(mealCaloriesDTO.getCalories())
                 .servingSizeG(mealCaloriesDTO.getServingSizeG())
+                .fatSaturatedG(mealCaloriesDTO.getFatTotalG())
                 .proteinG(mealCaloriesDTO.getProteinG())
                 .fatTotalG(mealCaloriesDTO.getFatTotalG())
                 .carbohydratesTotalG(mealCaloriesDTO.getCarbohydratesTotalG())
