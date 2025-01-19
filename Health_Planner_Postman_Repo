@@ -1,0 +1,636 @@
+{
+	"info": {
+		"_postman_id": "9f02ee4c-69f3-4c4d-8d0f-0a0c697d346d",
+		"name": "JWT SECURITY",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "29652406",
+		"_collection_link": "https://red-firefly-418999.postman.co/workspace/New-Team-Workspace~cc9865af-ac9b-42f1-a4c1-18994378b9d2/collection/29652406-9f02ee4c-69f3-4c4d-8d0f-0a0c697d346d?action=share&source=collection_link&creator=29652406"
+	},
+	"item": [
+		{
+			"name": "Demo Controller",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvbWVyc2VuQGdtYWlsLmNvbSIsImlhdCI6MTczMDkwMDcxOCwiZXhwIjoxNzMwOTAyMTU4fQ.12MDAJTJBkgckuodrY2ttSeLqVNTYLqo0LsTf22Hq5M"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/v1/democontroller"
+			},
+			"response": []
+		},
+		{
+			"name": "Register",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstname\": \"Atlas\",\r\n    \"lastname\": \"Demir\",\r\n    \"email\": \"atlasdemir@gmail.com\",\r\n    \"password\": \"1234\",\r\n    \"role\": \"DIETITIAN\"\r\n\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/v1/auth/register"
+			},
+			"response": []
+		},
+		{
+			"name": "Authenticate",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": ""
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\" : \"nimetdemir@gmail.com\",\r\n    \"password\": \"1234\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/v1/auth/authenticate"
+			},
+			"response": []
+		},
+		{
+			"name": "Dietitian Update",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdW1kZW1pcjIwMDFAZ21haWwuY29tIiwiaWF0IjoxNzM1MzA3MjgxLCJleHAiOjE3MzUzMDg3MjF9.gx6_qhy3vsB_VvOf8Vtu_Q6_qhK-RFEO-M2mVHISH3A"
+					}
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userid\": 252,\r\n    \"age\": 32,\r\n    \"specialization\": \"Pediatric Dietitian\",\r\n    \"experienceYear\": 10,\r\n    \"certification\": \"Registered Dietitian (RD)\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/v1/dietitian/update"
+			},
+			"response": []
+		},
+		{
+			"name": "DietPlan Create",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdW1kZW1pcjIwMDFAZ21haWwuY29tIiwiaWF0IjoxNzM1NTk5NTc4LCJleHAiOjE3MzU2MDEwMTh9.3ObIdWUUILZghStYTT_I7ffXYJurjgOGyTGq5Sg-WHU"
+					}
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer <eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJiZXl6YXR1cmFuQGdtYWlsLmNvbSIsImlhdCI6MTczMjQ1ODYwOCwiZXhwIjoxNzMyNDYwMDQ4fQ.v8CViXTohYZele3SbWNV9kJT2BafijxhqkxczqsTPY8>",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/dietplan/getDietPlan?clientId=1&dietitianId=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"dietplan",
+						"getDietPlan"
+					],
+					"query": [
+						{
+							"key": "clientId",
+							"value": "1"
+						},
+						{
+							"key": "dietitianId",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Trainer Update",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userid\": 352,\r\n    \"specialization\": \"Fitness\",\r\n    \"experienceYear\": 3,\r\n    \"certification\": \"Certified Personal Trainer\",\r\n    \"age\": 30\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/v1/trainer/update"
+			},
+			"response": []
+		},
+		{
+			"name": "Training Plan Create",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdW1kZW1pcjIwMDFAZ21haWwuY29tIiwiaWF0IjoxNzM1NjU2MzA5LCJleHAiOjE3MzU2NTc3NDl9.HuwCxDqb50O4JHaSej__FSYOLk1f-7WiRSL--g6alns"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/trainingplan/getTrainingPlan?clientId=1&trainerId=3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"trainingplan",
+						"getTrainingPlan"
+					],
+					"query": [
+						{
+							"key": "clientId",
+							"value": "1"
+						},
+						{
+							"key": "trainerId",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Client Update",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzZXZ2YWxrb2NAZ21haWwuY29tIiwiaWF0IjoxNzMyNTY0MDUxLCJleHAiOjE3MzI1NjU0OTF9.UrBRWCgZu3AapaOyYU-fqZuvA_1-qVo4YKxHhrez6YM"
+					}
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userid\": 202,\r\n    \"age\": 24,\r\n    \"height\": 180,\r\n    \"weight\": 68,\r\n    \"medicalConditions\": \"Manitasına çok aşık olmak.\",\r\n    \"goal\": \"Gain weight and muscle\",\r\n    \"activityLevel\": \"MEDIUM\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/v1/client/update"
+			},
+			"response": []
+		},
+		{
+			"name": "Forgot Password",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": ""
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"salihcakan@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/auth/forgot-password",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"forgot-password"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Reset Password",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/auth/reset-password?",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"reset-password"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Password",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": ""
+					}
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"cengiz@gmail.com\",\r\n    \"newPassword\": \"a1s2d3f4\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/v1/auth/update-password"
+			},
+			"response": []
+		},
+		{
+			"name": "All Dietitians",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/api/v1/dietitian/getAllDietitians"
+			},
+			"response": []
+		},
+		{
+			"name": "getDietPlanChat",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdW1kZW1pcjIwMDFAZ21haWwuY29tIiwiaWF0IjoxNzM1NTk4NDI0LCJleHAiOjE3MzU1OTk4NjR9.HPZ3KinSgS7FmZaQZ7PwgjvsuxLA2hEAdIJk_i6ZxfI"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"clientId\": 1,\r\n    \"dietitianId\" : 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/dietplan/getDietPlanChat"
+			},
+			"response": []
+		},
+		{
+			"name": "All Trainers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/api/v1/trainer/getAllTrainers"
+			},
+			"response": []
+		},
+		{
+			"name": "getTrainingPlanChat",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdW1kZW1pcjIwMDFAZ21haWwuY29tIiwiaWF0IjoxNzM1NjU2MzA5LCJleHAiOjE3MzU2NTc3NDl9.HuwCxDqb50O4JHaSej__FSYOLk1f-7WiRSL--g6alns"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"clientId\": 1,\r\n    \"trainerId\" : 3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/trainingplan/getTrainingPlanChat"
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Training Plans (BOZUK)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdW1kZW1pcjIwMDFAZ21haWwuY29tIiwiaWF0IjoxNzM1NzQyNzI2LCJleHAiOjE3MzU3NDQxNjZ9.T3eKy_yleUZPUfnOzcJjApai7H-aAu4S4EwZe8VeUxo"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/api/trainingplan/getAllTrainingPlans"
+			},
+			"response": []
+		},
+		{
+			"name": "getTrainingPlanById",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzYWxpaGNha2FuQGdtYWlsLmNvbSIsImlhdCI6MTczNjAyNzMxNiwiZXhwIjoxNzM2MDI4NzU2fQ.NpfsNljbQWu0BSAJf7cJ_7C-8Fh_EN6I-zueJZYx50I"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/api/trainingplan/10"
+			},
+			"response": []
+		},
+		{
+			"name": "Convert Training Plan",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzYWxpaGNha2FuQGdtYWlsLmNvbSIsImlhdCI6MTczNTc0NDcyNiwiZXhwIjoxNzM1NzQ2MTY2fQ.pxvNGY88ZHNgbMh4Xc3NHf4ILJC4-vYZlaAuDd_Pm0E"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/trainingplan/convert-plan?clientId=202&trainerId=3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"trainingplan",
+						"convert-plan"
+					],
+					"query": [
+						{
+							"key": "clientId",
+							"value": "202"
+						},
+						{
+							"key": "trainerId",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getTrainingPlanDTO",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzYWxpaGNha2FuQGdtYWlsLmNvbSIsImlhdCI6MTczNTc0NzY2MCwiZXhwIjoxNzM1NzQ5MTAwfQ.hsjShhHkMRUrF6lQ16u0yvAh8oW0xsRq2JfJvnaNIWI"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"clientId\" : 1,\r\n    \"trainerId\" : 3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/trainingplan/getTrainingPlanDTO"
+			},
+			"response": []
+		},
+		{
+			"name": "getDietPlanDTO",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzYWxpaGNha2FuQGdtYWlsLmNvbSIsImlhdCI6MTczNTc3MTM1OSwiZXhwIjoxNzM1NzcyNzk5fQ.DU19qtskSMHIagNaDa7DXmSNJ8Z3-6FVzYgZpEQ1dbQ"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"clientId\":202,\r\n    \"dietitianId\":2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/dietplan/getDietPlanDTO"
+			},
+			"response": []
+		},
+		{
+			"name": "getAllDietPlansForUser (param)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzYWxpaGNha2FuQGdtYWlsLmNvbSIsImlhdCI6MTczNjAyODAwOSwiZXhwIjoxNzM2MDI5NDQ5fQ.X2o17WG3dGzD3a89Uj2oT03O0G08MBp1dav10g291Jo"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/dietplan/getAllDietPlansForUser?clientId=202",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"dietplan",
+						"getAllDietPlansForUser"
+					],
+					"query": [
+						{
+							"key": "clientId",
+							"value": "202"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllTrainingPlansForUser",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzYWxpaGNha2FuQGdtYWlsLmNvbSIsImlhdCI6MTczNjAyOTczNSwiZXhwIjoxNzM2MDMxMTc1fQ.41UnNCy4X_a6Xb7zYfEpz5ayDSGmoX19q7Niyaj0sMw"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/trainingplan/getAllTrainingPlansForUser?clientId=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"trainingplan",
+						"getAllTrainingPlansForUser"
+					],
+					"query": [
+						{
+							"key": "clientId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "save Meal Calorie",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuaW1ldGRlbWlyQGdtYWlsLmNvbSIsImlhdCI6MTczNzIyODU0OCwiZXhwIjoxNzM3MjI5OTg4fQ.xdysGWmgrxgVxvdu5-CeSC1d-XnCbwdOh51QgshnIDE"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"clientId\": 402,\r\n  \"mealCaloriesDTO\": {\r\n    \"name\": \"Cake\",\r\n    \"fatTotalG\": 14,\r\n    \"carbohydratesTotalG\": 60.5,\r\n    \"sodiumMg\": 185,\r\n    \"potassiumMg\": 90,\r\n    \"cholesterolMg\": 30,\r\n    \"fiberG\": 4.5,\r\n    \"sugarG\": 40,\r\n    \"createdAt\": \"2025-01-18T19:13:17.876Z\",\r\n    \"calories\": \"Only available for premium subscribers.\",\r\n    \"servingSizeG\": \"150\",\r\n    \"proteinG\": \"5.5\",\r\n    \"fatSaturatedG\": 6.7\r\n  }\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/mealCalorie/saveMealCaloriesDTO"
+			},
+			"response": []
+		},
+		{
+			"name": "get MealbyId",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuaW1ldGRlbWlyQGdtYWlsLmNvbSIsImlhdCI6MTczNzIzNzcxOSwiZXhwIjoxNzM3MjM5MTU5fQ.YRbIHFMe2LPl-TQYGs--r6BTLXHaG8h_ecg7meLrIcQ"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/mealCalorie/getAllMealsForUser?clientId=302",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"mealCalorie",
+						"getAllMealsForUser"
+					],
+					"query": [
+						{
+							"key": "clientId",
+							"value": "302"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
