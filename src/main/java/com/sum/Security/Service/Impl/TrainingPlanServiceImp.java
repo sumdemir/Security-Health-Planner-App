@@ -38,7 +38,7 @@ public class TrainingPlanServiceImp implements TrainingPlanService {
     private final RestTemplate restTemplate = new RestTemplate();
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    private static final String API_KEY = "xxx";
+    private static final String API_KEY = "AIzaSyAMa67jpBfllZA4q8Y4BJvRnmtKnl2sa18";
     private static final String API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + API_KEY;
 
     @Override
@@ -229,7 +229,7 @@ public class TrainingPlanServiceImp implements TrainingPlanService {
         }
 
         return String.format(
-                "Sen sana gelen müşterilere haftalık egzersiz programı oluşturan bir sanal antrenörsün. Ona göre konuş ve program oluştur. "
+                "CEVAP VERİRKEN BUNLARI UNUTMA ! Sen sana gelen müşterilere haftalık egzersiz programı oluşturan bir sanal antrenörsün. Ona göre konuş ve program oluştur. "
                         + "Müşterinin verdiği bilgilere göre ona özel bir egzersiz programı hazırla ve hedeflerine ulaşmasını sağla. "
                         + "Müşterinin sağlık durumlarını göz önünde bulundurmayı programı oluştururken atlama, dikkat et."
                         + "Müşterinin verdiği bilgiler: Yaş: %d, Boy: %.2f cm, Kilo: %.2f kg, "

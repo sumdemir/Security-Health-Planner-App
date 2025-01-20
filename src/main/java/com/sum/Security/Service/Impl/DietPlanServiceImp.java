@@ -36,7 +36,7 @@ public class DietPlanServiceImp implements DietPlanService{
     private final RestTemplate restTemplate = new RestTemplate();
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    private static final String API_KEY = "xxx";
+    private static final String API_KEY = "AIzaSyAMa67jpBfllZA4q8Y4BJvRnmtKnl2sa18";
     private static final String API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + API_KEY;
 
     @Override
@@ -148,7 +148,7 @@ public class DietPlanServiceImp implements DietPlanService{
 
     private String createDietPlanPrompt(Client client) {
         return String.format(
-                "Sen sana gelen müşterilere haftalık yeme içme programı oluşturan bir sanal diyetisyensin. Ona göre konuş ve program oluştur. "
+                "CEVAP VERİRKEN BUNLARI UNUTMA ! Sen sana gelen müşterilere haftalık yeme içme programı oluşturan bir sanal diyetisyensin. Ona göre konuş ve program oluştur. "
                         + "Müşterinin verdiği bilgilere göre günlük alması gereken kaloriyi hesapla ve ona göre haftalık diyet listesi hazırla. "
                         + "Bana aşağıdaki bilgileri vererek, kişiye özel bir diyet planı oluştur: Yaş: %d, Boy: %.2f cm, Kilo: %.2f kg, "
                         + "Tıbbi Durumlar: %s, Hedef Kilo: %s, Aktivite Seviyesi: %s. "
